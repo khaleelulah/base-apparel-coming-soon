@@ -23,9 +23,11 @@
         
         * {
             margin: 0;
+            padding: 0;
             /* font-family: monospace; */
             font-family: Times, 'Times New Roman', serif;
             padding: 0;
+            outline: none;
         }
         
         body {
@@ -75,27 +77,31 @@
             margin-top: 30px;
             color: hsl(0, 36%, 70%);
         }
-        /* .inputcontainer {
-         
-          
-            overflow: hidden;
+        
+        .input-container {
+            position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
-          ;
-        } */
+            margin-top: 30px;
+            width: 100%;
+            border-radius: 50px;
+            border: hsl(0, 36%, 70%) solid 2px;
+            overflow: hidden;
+        }
+        
+        .input-container img {
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            /* height: 50%; */
+        }
         
         input {
-            /* margin-top: 30px; */
-            /* height: 100%; */
             height: 50px;
-            /* border: none; */
-            /* border-radius: 50px; */
-            /* border: 2px solid hsl(0, 36%, 70%); */
-            color: hsl(0, 36%, 70%);
+            color: hsl(0, 74%, 74%);
             padding: 0 20px;
             font-size: 20px;
-            width: 80%;
+            width: 78%;
             border: none;
         }
         
@@ -110,14 +116,13 @@
         }
         
         button {
-            background-color: hsl(0, 36%, 70%);
+            background: linear-gradient(135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
             color: white;
             font-size: 18px;
-            width: 20%;
+            width: 22%;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* padding: 15px 20px; */
             border-style: none;
             border-radius: 50px;
             position: relative;
@@ -141,8 +146,9 @@
                 <div class="logo"><img src="./images/logo.svg" alt=""></div>
                 <h1><span>We're</span> <br> coming soon</h1>
                 <p> Hello fellow shoppers! We're currently building our new fashion store. Add your email below to stay up-to-date with announcements and our launch deals.</p>
-                <div id="inputcontainer" style="display: flex;justify-content: center; margin-top: 30px;width: 100%;border-radius: 50px;border: hsl(0, 36%, 70%) solid 2px; overflow: hidden;">
-                    <input type="text" id="text">
+                <div id="inputcontainer" class="input-container">
+                    <input type="email" id="text" placeholder="Email address">
+                    <img src="./images/icon-error.svg" alt="">
                     <button id="btn" style="z-index: 4;">></button></span>
                 </div>
                 <p id="thanks"></p>
@@ -163,12 +169,17 @@
         var inputcon = document.getElementById("inputcontainer")
         var thanks = document.getElementById("thanks")
         btn.addEventListener("click", function() {
-            if (input.innerText == "") {
-                btn.style.marginRight = "-90px"
-                inputcon.style.overflow = "visible"
+            if (input.value) {
+                btn.style.transform = "translateX(0)"
+
 
             } else {
-                thanks.innerText = "thank you for your feedback"
+                btn.style.transform = "translateX(70px)"
+                inputcon.style.borderColor = "red"
+                inputcon.style.overflow = "visible"
+                thanks.style.color = "red"
+                thanks.innerText = "please provide a valid email address"
+
 
             }
         })
